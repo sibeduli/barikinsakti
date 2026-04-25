@@ -383,9 +383,9 @@ export default function Home() {
           </div>
           <div className="grid md:grid-cols-4 gap-6">
             {[
-              { title: "Slickline Unit", specs: ["Double Drum Hydraulic Winch", "Perkins 6 Cylinder Engine (125 HP)", "25,000 ft wire capacity", "Zone 2 TEPI Standard"] },
+              { title: "Slickline Unit", specs: ["Double & Single Drum Hydraulic Winch", "Perkins 6 Cylinder Engine (125 HP)", "25,000 ft wire capacity", "Zone 2 BSEN Standard"] },
               { title: "Triplex Pump Unit", specs: ["RELIABLE RD300 (US Made)", "120 BHP Perkins Engine", "Up to 10,000 psi outlet", "BV Certificate Zone-02"] },
-              { title: "PPS28 Memory Gauge", specs: ["Silicon Sapphire Sensor", "Inconel 718 Housing", "Up to 20,000 psi range", "USB/RS232 Communication"] },
+              { title: "PPS28 Memory Gauge", specs: ["Quartz Pressure Transducer", "Inconel 718 Housing", "Up to 25,000 psi range", "USB/RS232 Communication"] },
               { title: "M-Production Logging", specs: ["Modular Design", "Pressure, Temp, Spinner sensors", "Caliper & Fluid Density", "350°F (600°F high-temp)"] }
             ].map((eq, i) => (
               <div key={i} className="p-6 bg-white/5 border border-white/10 rounded-xl">
@@ -414,8 +414,7 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
               "Total E&P Indonesie", "Pertamina EP", "ConocoPhillips", "Chevron Pacific",
-              "Kangean Energy", "Star Energy", "TIS Petroleum E&P", "Jindi South Jambi",
-              "Sele Raya Belida", "EMP Malacca Strait"
+              "Kangean Energy", "Star Energy Geothermal", "TIS Petroleum E&P", "EMP Malacca Strait"
             ].map((client, i) => (
               <div key={i} className="p-5 bg-white/5 border border-white/10 rounded-xl text-center">
                 <span className="text-gray-400 text-sm">{client}</span>
