@@ -22,7 +22,12 @@ export default function Home() {
 
       {/* Hero */}
       <section className="relative pt-32 pb-24 px-6 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0a0f1a] via-[#142238] to-[#1a3a5c]" />
+        <div className="absolute inset-0 bg-[#0a0f1a]" />
+        <div 
+          className="absolute top-0 bottom-0 right-0 w-2/3 opacity-[0.32] bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/drill.jpg')" }}
+        />
+        <div className="absolute top-0 bottom-0 right-0 w-2/3 bg-gradient-to-r from-[#0a0f1a] to-transparent" />
         <div className="absolute inset-0 opacity-30">
           <div className="absolute top-20 left-10 w-72 h-72 bg-[#d4a574]/20 rounded-full blur-3xl" />
           <div className="absolute bottom-10 right-10 w-96 h-96 bg-[#1a5276]/30 rounded-full blur-3xl" />
