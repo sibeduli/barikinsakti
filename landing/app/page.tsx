@@ -107,14 +107,17 @@ export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isImageLoading, setIsImageLoading] = useState(true);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [isLightboxLoading, setIsLightboxLoading] = useState(false);
 
   const currentImages = workCategories[currentCategory].images;
   const nextSlide = () => {
     setIsImageLoading(true);
+    setIsLightboxLoading(true);
     setCurrentSlide((prev) => (prev + 1) % currentImages.length);
   };
   const prevSlide = () => {
     setIsImageLoading(true);
+    setIsLightboxLoading(true);
     setCurrentSlide((prev) => (prev - 1 + currentImages.length) % currentImages.length);
   };
   
@@ -135,7 +138,7 @@ export default function Home() {
       <header className="fixed top-0 left-0 right-0 z-50 bg-[#0a0f1a]/90 backdrop-blur-md border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Image src="/logo.jpg" alt="PT. Barikin Sakti Logo" width={36} height={36} className="rounded" />
+            <Image src="/logo.jpg" alt="PT. Barikin Sakti Logo" width={36} height={36} className="rounded w-auto h-auto" />
             <span className="text-xl font-bold text-white tracking-tight">
               PT. BARIKIN <span className="text-[#d4a574]">SAKTI</span>
             </span>
@@ -147,7 +150,7 @@ export default function Home() {
             <a href="#clients" className="text-gray-400 hover:text-white transition-colors">Clients</a>
             <a href="#contact" className="text-gray-400 hover:text-white transition-colors">Contact</a>
           </nav>
-          <a href="#contact" className="px-5 py-2.5 bg-gradient-to-r from-[#d4a574] to-[#b8956a] text-[#0a0f1a] text-sm font-semibold rounded-lg hover:opacity-90 transition-opacity">
+          <a href="#contact" className="px-3 py-2 md:px-5 md:py-2.5 bg-gradient-to-r from-[#d4a574] to-[#b8956a] text-[#0a0f1a] text-xs md:text-sm font-semibold rounded-lg hover:opacity-90 transition-opacity">
             Get in Touch
           </a>
         </div>
@@ -323,44 +326,47 @@ export default function Home() {
                   />
                   {/* Enlarge button */}
                   <button
-                    onClick={() => setIsLightboxOpen(true)}
-                    className="absolute top-4 right-4 w-10 h-10 bg-[#0a0f1a]/80 border border-white/10 rounded-lg flex items-center justify-center text-white hover:bg-[#0a0f1a] transition-colors z-10"
+                    onClick={() => { setIsLightboxOpen(true); setIsLightboxLoading(true); }}
+                    className="absolute top-2 right-2 md:top-4 md:right-4 w-8 h-8 md:w-10 md:h-10 bg-[#0a0f1a]/80 border border-white/10 rounded-lg flex items-center justify-center text-white hover:bg-[#0a0f1a] active:bg-[#0a0f1a] transition-colors z-10"
                     title="Enlarge image"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="15 3 21 3 21 9" />
                       <polyline points="9 21 3 21 3 15" />
                       <line x1="21" y1="3" x2="14" y2="10" />
                       <line x1="3" y1="21" x2="10" y2="14" />
                     </svg>
                   </button>
+                  {/* Navigation arrows inside image container */}
+                  {currentImages.length > 1 && (
+                    <>
+                      <button
+                        onClick={prevSlide}
+                        className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 w-8 h-8 md:w-12 md:h-12 bg-[#0a0f1a]/80 border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-[#0a0f1a] active:bg-[#0a0f1a] transition-colors z-10"
+                      >
+                        ←
+                      </button>
+                      <button
+                        onClick={nextSlide}
+                        className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 w-8 h-8 md:w-12 md:h-12 bg-[#0a0f1a]/80 border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-[#0a0f1a] active:bg-[#0a0f1a] transition-colors z-10"
+                      >
+                        →
+                      </button>
+                    </>
+                  )}
                 </div>
                 {currentImages.length > 1 && (
-                  <>
-                    <button
-                      onClick={prevSlide}
-                      className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-[#0a0f1a]/80 border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-[#0a0f1a] transition-colors"
-                    >
-                      ←
-                    </button>
-                    <button
-                      onClick={nextSlide}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-[#0a0f1a]/80 border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-[#0a0f1a] transition-colors"
-                    >
-                      →
-                    </button>
-                    <div className="flex justify-center gap-2 mt-6">
-                      {currentImages.map((_, i) => (
-                        <button
-                          key={i}
-                          onClick={() => handleSlideChange(i)}
-                          className={`w-3 h-3 rounded-full transition-colors ${
-                            i === currentSlide ? "bg-[#d4a574]" : "bg-white/20"
-                          }`}
-                        />
-                      ))}
-                    </div>
-                  </>
+                  <div className="flex justify-center gap-2 mt-4 md:mt-6">
+                    {currentImages.map((_, i) => (
+                      <button
+                        key={i}
+                        onClick={() => handleSlideChange(i)}
+                        className={`w-2.5 h-2.5 md:w-3 md:h-3 rounded-full transition-colors ${
+                          i === currentSlide ? "bg-[#d4a574]" : "bg-white/20"
+                        }`}
+                      />
+                    ))}
+                  </div>
                 )}
               </div>
             </div>
@@ -460,52 +466,59 @@ export default function Home() {
       {/* Lightbox Modal */}
       {isLightboxOpen && (
         <div 
-          className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center"
+          className="fixed inset-0 z-[100] bg-black touch-none flex flex-col"
           onClick={() => setIsLightboxOpen(false)}
         >
           {/* Close button */}
           <button
             onClick={() => setIsLightboxOpen(false)}
-            className="absolute top-6 right-6 w-12 h-12 bg-white/10 border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+            className="absolute top-4 right-4 w-10 h-10 bg-black border border-white/30 rounded-full flex items-center justify-center text-white active:bg-white/20 transition-colors z-[110]"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <line x1="18" y1="6" x2="6" y2="18" />
               <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
           </button>
-          {/* Navigation in lightbox */}
-          {currentImages.length > 1 && (
-            <>
-              <button
-                onClick={(e) => { e.stopPropagation(); prevSlide(); }}
-                className="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors"
-              >
-                ←
-              </button>
-              <button
-                onClick={(e) => { e.stopPropagation(); nextSlide(); }}
-                className="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors"
-              >
-                →
-              </button>
-            </>
-          )}
-          {/* Enlarged image */}
-          <div className="relative w-[90vw] h-[90vh]" onClick={(e) => e.stopPropagation()}>
+          {/* Image area */}
+          <div className="flex-1 relative min-h-0" onClick={(e) => e.stopPropagation()}>
+            {isLightboxLoading && (
+              <div className="absolute inset-0 flex items-center justify-center z-10">
+                <div className="w-10 h-10 border-2 border-[#d4a574] border-t-transparent rounded-full animate-spin" />
+              </div>
+            )}
             <Image
               src={currentImages[currentSlide]}
               alt={`${workCategories[currentCategory].title} slide ${currentSlide + 1}`}
               fill
-              className="object-contain"
-              sizes="90vw"
+              className="object-contain p-2"
+              sizes="100vw"
               priority
+              onLoad={() => setIsLightboxLoading(false)}
             />
           </div>
-          {/* Image counter */}
+          {/* Bottom navigation - always visible */}
           {currentImages.length > 1 && (
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 px-4 py-2 bg-white/10 border border-white/20 rounded-full text-white text-sm">
-              {currentSlide + 1} / {currentImages.length}
+            <div className="flex items-center justify-center gap-6 py-4 bg-black z-[110]" onClick={(e) => e.stopPropagation()}>
+              <button
+                onClick={(e) => { e.stopPropagation(); prevSlide(); }}
+                className="w-12 h-12 bg-white/10 border border-white/30 rounded-full flex items-center justify-center text-white text-xl active:bg-white/30 transition-colors"
+              >
+                ←
+              </button>
+              <div className="px-4 py-2 bg-white/10 border border-white/30 rounded-full text-white text-sm min-w-[60px] text-center">
+                {currentSlide + 1} / {currentImages.length}
+              </div>
+              <button
+                onClick={(e) => { e.stopPropagation(); nextSlide(); }}
+                className="w-12 h-12 bg-white/10 border border-white/30 rounded-full flex items-center justify-center text-white text-xl active:bg-white/30 transition-colors"
+              >
+                →
+              </button>
             </div>
+          )}
+          {/* Spacer for single image */}
+          {currentImages.length <= 1 && (
+            <div className="py-4 bg-black" />
           )}
         </div>
       )}
