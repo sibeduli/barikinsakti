@@ -194,9 +194,9 @@ export default function Home() {
           </div>
           <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { value: "29+", label: "Years Experience" },
+              { value: "31+", label: "Years Experience" },
               { value: "20+", label: "Years at Total EP" },
-              { value: "12+", label: "Major Clients" },
+              { value: "9+", label: "Major Clients" },
               { value: "100%", label: "Indonesia Coverage" }
             ].map((stat, i) => (
               <div key={i} className="p-6 bg-white/5 border border-white/10 rounded-xl">
@@ -264,8 +264,8 @@ export default function Home() {
                 items: ["Memory Reservoir Analysis", "Memory Production Logging (MPLT)", "Well Integrity Logging", "Downhole Video Inspection", "EMR Pressure & Temperature Recording", "Leak Detection"]
               },
               {
-                title: "Testing Services",
-                items: ["BOP Testing", "Hydrostatic Testing", "High Pressure Testing (10,000 psi)", "Stimulation Gun Services", "Bottom Hole Sampling", "Fluid & Gas Analysis"]
+                title: "Testing & Survey",
+                items: ["Bottom Hole Survey (EMR)", "Test Tubing / Leak Detection", "High Pressure Testing (10,000 psi)", "Stimulation Gun Services", "Mechanical Perforation", "Light Workover Support"]
               }
             ].map((service, i) => (
               <div key={i} className="p-8 bg-gradient-to-br from-[#142238] to-[#0d1420] border border-white/10 rounded-2xl">
@@ -383,10 +383,10 @@ export default function Home() {
           </div>
           <div className="grid md:grid-cols-4 gap-6">
             {[
-              { title: "Slickline Unit", specs: ["Double & Single Drum Hydraulic Winch", "Perkins 6 Cylinder Engine (125 HP)", "25,000 ft wire capacity", "Zone 2 BSEN Standard"] },
+              { title: "Slickline Unit", specs: ["Double Drum Hydraulic Winch", "Perkins 6 Cylinder Engine (125 HP)", "25,000 ft wire capacity", "Zone 2 TEPI Standard"] },
               { title: "Triplex Pump Unit", specs: ["RELIABLE RD300 (US Made)", "120 BHP Perkins Engine", "Up to 10,000 psi outlet", "BV Certificate Zone-02"] },
-              { title: "PPS28 Memory Gauge", specs: ["Quartz Pressure Transducer", "Made in Canada", "Up to 25K psi range", "USB/RS232 Communication"] },
-              { title: "M-Production Logging", specs: ["Modular Design", "Pressure, Temp, Spinner sensors", "Caliper & Fluid Density", "Up to 600°F rating"] }
+              { title: "PPS28 Memory Gauge", specs: ["Silicon Sapphire Sensor", "Inconel 718 Housing", "Up to 20,000 psi range", "USB/RS232 Communication"] },
+              { title: "M-Production Logging", specs: ["Modular Design", "Pressure, Temp, Spinner sensors", "Caliper & Fluid Density", "350°F (600°F high-temp)"] }
             ].map((eq, i) => (
               <div key={i} className="p-6 bg-white/5 border border-white/10 rounded-xl">
                 <h3 className="text-white font-semibold mb-4">{eq.title}</h3>
@@ -413,9 +413,9 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              "Total EP Indonesia", "Pertamina EP", "Pertamina Hulu Energi", "ConocoPhillips",
-              "Chevron Pacific", "Kangean Energy", "Star Energy Geothermal", "TIS Petroleum E&P",
-              "Jindi South Jambi", "Sele Raya Belida", "EMP Malacca Strait", "Indosino"
+              "Total E&P Indonesie", "Pertamina EP", "ConocoPhillips", "Chevron Pacific",
+              "Kangean Energy", "Star Energy", "TIS Petroleum E&P", "Jindi South Jambi",
+              "Sele Raya Belida", "EMP Malacca Strait"
             ].map((client, i) => (
               <div key={i} className="p-5 bg-white/5 border border-white/10 rounded-xl text-center">
                 <span className="text-gray-400 text-sm">{client}</span>
