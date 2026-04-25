@@ -106,6 +106,7 @@ export default function Home() {
   const [currentCategory, setCurrentCategory] = useState(0);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isImageLoading, setIsImageLoading] = useState(true);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
   const currentImages = workCategories[currentCategory].images;
   const nextSlide = () => {
@@ -320,6 +321,19 @@ export default function Home() {
                     sizes="(max-width: 768px) 100vw, 70vw"
                     onLoad={() => setIsImageLoading(false)}
                   />
+                  {/* Enlarge button */}
+                  <button
+                    onClick={() => setIsLightboxOpen(true)}
+                    className="absolute top-4 right-4 w-10 h-10 bg-[#0a0f1a]/80 border border-white/10 rounded-lg flex items-center justify-center text-white hover:bg-[#0a0f1a] transition-colors z-10"
+                    title="Enlarge image"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="15 3 21 3 21 9" />
+                      <polyline points="9 21 3 21 3 15" />
+                      <line x1="21" y1="3" x2="14" y2="10" />
+                      <line x1="3" y1="21" x2="10" y2="14" />
+                    </svg>
+                  </button>
                 </div>
                 {currentImages.length > 1 && (
                   <>
@@ -442,6 +456,59 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Lightbox Modal */}
+      {isLightboxOpen && (
+        <div 
+          className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center"
+          onClick={() => setIsLightboxOpen(false)}
+        >
+          {/* Close button */}
+          <button
+            onClick={() => setIsLightboxOpen(false)}
+            className="absolute top-6 right-6 w-12 h-12 bg-white/10 border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+          {/* Navigation in lightbox */}
+          {currentImages.length > 1 && (
+            <>
+              <button
+                onClick={(e) => { e.stopPropagation(); prevSlide(); }}
+                className="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+              >
+                ←
+              </button>
+              <button
+                onClick={(e) => { e.stopPropagation(); nextSlide(); }}
+                className="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+              >
+                →
+              </button>
+            </>
+          )}
+          {/* Enlarged image */}
+          <div className="relative w-[90vw] h-[90vh]" onClick={(e) => e.stopPropagation()}>
+            <Image
+              src={currentImages[currentSlide]}
+              alt={`${workCategories[currentCategory].title} slide ${currentSlide + 1}`}
+              fill
+              className="object-contain"
+              sizes="90vw"
+              priority
+            />
+          </div>
+          {/* Image counter */}
+          {currentImages.length > 1 && (
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 px-4 py-2 bg-white/10 border border-white/20 rounded-full text-white text-sm">
+              {currentSlide + 1} / {currentImages.length}
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Footer */}
       <footer className="py-8 px-6 bg-[#070a10] border-t border-white/5">
