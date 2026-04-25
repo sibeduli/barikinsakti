@@ -1,0 +1,12 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: barikin-landing
+    restart: unless-stopped
+    network_mode: host
+    env_file:
+      - .env.production
+    environment:
+      - NODE_ENV=production
