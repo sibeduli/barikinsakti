@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image";
 
 const workCategories = [
   {
@@ -287,11 +288,14 @@ export default function Home() {
               </div>
               {/* Slideshow */}
               <div className="relative">
-                <div className="overflow-hidden rounded-2xl border border-white/10 bg-black aspect-[16/10]">
-                  <img
+                <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black aspect-[16/10]">
+                  <Image
                     src={currentImages[currentSlide]}
                     alt={`${workCategories[currentCategory].title} slide ${currentSlide + 1}`}
-                    className="w-full h-full object-contain"
+                    fill
+                    className="object-contain"
+                    loading="lazy"
+                    sizes="(max-width: 768px) 100vw, 70vw"
                   />
                 </div>
                 <button
