@@ -196,7 +196,7 @@ export default function Home() {
             {[
               { value: "31+", label: "Years Experience" },
               { value: "20+", label: "Years at Total EP" },
-              { value: "9+", label: "Major Clients" },
+              { value: "8+", label: "Major Clients" },
               { value: "100%", label: "Indonesia Coverage" }
             ].map((stat, i) => (
               <div key={i} className="p-6 bg-white/5 border border-white/10 rounded-xl">
@@ -264,8 +264,15 @@ export default function Home() {
                 items: ["Memory Reservoir Analysis", "Memory Production Logging (MPLT)", "Well Integrity Logging", "Downhole Video Inspection", "EMR Pressure & Temperature Recording", "Leak Detection"]
               },
               {
-                title: "Testing & Survey",
-                items: ["Bottom Hole Survey (EMR)", "Test Tubing / Leak Detection", "High Pressure Testing (10,000 psi)", "Stimulation Gun Services", "Mechanical Perforation", "Light Workover Support"]
+                title: "Testing Services",
+                items: [
+                  "BOP Testing",
+                  "Hydrostatic Testing",
+                  "High Pressure Testing (10,000 psi)",
+                  "Stimulation Gun Services",
+                  "Bottom Hole Sampling",
+                  "Fluid & Gas Analysis"
+                ]
               }
             ].map((service, i) => (
               <div key={i} className="p-8 bg-gradient-to-br from-[#142238] to-[#0d1420] border border-white/10 rounded-2xl">
@@ -442,8 +449,8 @@ export default function Home() {
                 <div>
                   <div className="text-[#d4a574] text-sm font-medium mb-2">Contact</div>
                   <p className="text-gray-400">Phone: +62 (21) 2962 7016</p>
-                  <p className="text-gray-400">Direct: George Bellini +62 811-192-071</p>
-                  <p className="text-gray-400">Email: admin@barikinsakti.com</p>
+                  <p className="text-gray-400">Direct: Georgi Bellini +62 811-192-071</p>
+                  <p className="text-gray-400">Email: barikin@cbn.net.id</p>
                 </div>
               </div>
             </div>
