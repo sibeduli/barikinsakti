@@ -105,14 +105,27 @@ const workCategories = [
 export default function Home() {
   const [currentCategory, setCurrentCategory] = useState(0);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isImageLoading, setIsImageLoading] = useState(true);
 
   const currentImages = workCategories[currentCategory].images;
-  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % currentImages.length);
-  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + currentImages.length) % currentImages.length);
+  const nextSlide = () => {
+    setIsImageLoading(true);
+    setCurrentSlide((prev) => (prev + 1) % currentImages.length);
+  };
+  const prevSlide = () => {
+    setIsImageLoading(true);
+    setCurrentSlide((prev) => (prev - 1 + currentImages.length) % currentImages.length);
+  };
   
   const selectCategory = (index: number) => {
     setCurrentCategory(index);
     setCurrentSlide(0);
+    setIsImageLoading(true);
+  };
+
+  const handleSlideChange = (newSlide: number) => {
+    setCurrentSlide(newSlide);
+    setIsImageLoading(true);
   };
 
   return (
@@ -289,38 +302,49 @@ export default function Home() {
               {/* Slideshow */}
               <div className="relative">
                 <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black aspect-[16/10]">
+                  {isImageLoading && (
+                    <div className="absolute inset-0 flex items-center justify-center z-10">
+                      <div className="w-8 h-8 border-2 border-[#d4a574] border-t-transparent rounded-full animate-spin" />
+                    </div>
+                  )}
                   <Image
+                    key={`${currentCategory}-${currentSlide}`}
                     src={currentImages[currentSlide]}
                     alt={`${workCategories[currentCategory].title} slide ${currentSlide + 1}`}
                     fill
                     className="object-contain"
-                    loading="lazy"
+                    priority
                     sizes="(max-width: 768px) 100vw, 70vw"
+                    onLoad={() => setIsImageLoading(false)}
                   />
                 </div>
-                <button
-                  onClick={prevSlide}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-[#0a0f1a]/80 border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-[#0a0f1a] transition-colors"
-                >
-                  ←
-                </button>
-                <button
-                  onClick={nextSlide}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-[#0a0f1a]/80 border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-[#0a0f1a] transition-colors"
-                >
-                  →
-                </button>
-                <div className="flex justify-center gap-2 mt-6">
-                  {currentImages.map((_, i) => (
+                {currentImages.length > 1 && (
+                  <>
                     <button
-                      key={i}
-                      onClick={() => setCurrentSlide(i)}
-                      className={`w-3 h-3 rounded-full transition-colors ${
-                        i === currentSlide ? "bg-[#d4a574]" : "bg-white/20"
-                      }`}
-                    />
-                  ))}
-                </div>
+                      onClick={prevSlide}
+                      className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-[#0a0f1a]/80 border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-[#0a0f1a] transition-colors"
+                    >
+                      ←
+                    </button>
+                    <button
+                      onClick={nextSlide}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-[#0a0f1a]/80 border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-[#0a0f1a] transition-colors"
+                    >
+                      →
+                    </button>
+                    <div className="flex justify-center gap-2 mt-6">
+                      {currentImages.map((_, i) => (
+                        <button
+                          key={i}
+                          onClick={() => handleSlideChange(i)}
+                          className={`w-3 h-3 rounded-full transition-colors ${
+                            i === currentSlide ? "bg-[#d4a574]" : "bg-white/20"
+                          }`}
+                        />
+                      ))}
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>
