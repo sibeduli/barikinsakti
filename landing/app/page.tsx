@@ -528,8 +528,8 @@ export default function Home() {
           </div>
           <div className="grid md:grid-cols-4 gap-6">
             {[
-              { title: "Slickline Unit", specs: ["Double & Single Drum Hydraulic Winch", "Perkins 6 Cylinder Engine (125 HP)", "25,000 ft wire capacity", "Zone 2 BSEN Standard"] },
-              { title: "Triplex Pump Unit", specs: ["RELIABLE RD300 (US Made)", "120 BHP Perkins Engine", "Up to 10,000 psi outlet", "BV Certificate Zone-02"] },
+              { title: "Slickline Unit", specs: ["Double & Single Drum Hydraulic Winch", "Perkins 6 Cylinder Engine (125 HP)", "25,000 ft wire capacity", "Suitable for Zone 2 operations (BSEN compliant)"] },
+              { title: "Triplex Pump Unit", specs: ["RELIABLE RD300 (US Made)", "120 BHP Perkins Engine", "Up to 10,000 psi outlet", "Suitable for Zone 2 operations (IEC 60079 compliant)"] },
               { title: "PPS28 Memory Gauge", specs: ["Quartz Pressure Transducer", "Inconel 718 Housing", "Up to 25,000 psi range", "USB/RS232 Communication"] },
               { title: "M-Production Logging", specs: ["Modular Design", "Pressure, Temp, Spinner sensors", "Caliper & Fluid Density", "350°F (600°F high-temp)"] }
             ].map((eq, i) => (
