@@ -145,6 +145,7 @@ export default function Home() {
           </div>
           <nav className="hidden md:flex items-center gap-8 text-sm">
             <a href="#about" className="text-gray-400 hover:text-white transition-colors">About</a>
+            <a href="#history" className="text-gray-400 hover:text-white transition-colors">History</a>
             <a href="#services" className="text-gray-400 hover:text-white transition-colors">Services</a>
             <a href="#equipment" className="text-gray-400 hover:text-white transition-colors">Equipment</a>
             <a href="#clients" className="text-gray-400 hover:text-white transition-colors">Clients</a>
@@ -241,6 +242,122 @@ export default function Home() {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* History / Timeline */}
+      <section id="history" className="py-24 px-6 bg-[#0a0f1a]">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-white mb-4">Our Journey</h2>
+            <p className="text-gray-500 max-w-2xl mx-auto">Three decades of growth, certifications, and partnerships across Indonesia</p>
+          </div>
+
+          <div className="relative">
+            {/* Desktop: horizontal line */}
+            <div className="hidden md:block absolute top-[72px] left-0 right-0 h-0.5 bg-white/10" />
+
+            <div className="grid md:grid-cols-10 gap-8 md:gap-0">
+              {[
+                {
+                  year: "1995",
+                  title: "Established",
+                  desc: "PT. Barikin Sakti founded in Jakarta.",
+                  align: "top",
+                },
+                {
+                  year: "1997",
+                  title: "First Total EP Contract",
+                  desc: "Slickline services with boat KM Teluk Kamrau.",
+                  align: "bottom",
+                },
+                {
+                  year: "2000",
+                  title: "Fleet Expansion",
+                  desc: "Contract won at Total EP; acquired 2nd boat KM Muara Sejahtera.",
+                  align: "top",
+                },
+                {
+                  year: "2006",
+                  title: "Second Term at Total EP",
+                  desc: "Renewed contract for slickline services with boat.",
+                  align: "bottom",
+                },
+                {
+                  year: "2011",
+                  title: "ISO 9001-2008",
+                  desc: "QMS certified by TUV Rheinland.",
+                  align: "top",
+                },
+                {
+                  year: "2016",
+                  title: "Chevron Pacific",
+                  desc: "Rigless services contract won at Chevron Pacific.",
+                  align: "bottom",
+                },
+                {
+                  year: "2018",
+                  title: "ISO 9001-2015",
+                  desc: "Upgraded QMS certification.",
+                  align: "top",
+                },
+                {
+                  year: "2019",
+                  title: "ConocoPhillips Grissik",
+                  desc: "Contract 2019-2022; deployed 2 portable DD slickline units.",
+                  align: "bottom",
+                },
+                {
+                  year: "2022",
+                  title: "StarEnergy Geothermal",
+                  desc: "Wellhead replacement with retrievable packer 2022-2023.",
+                  align: "top",
+                },
+                {
+                  year: "2024",
+                  title: "TIS Petroleum E&P",
+                  desc: "Slickline services for RBG-3B onshore area, Blora.",
+                  align: "bottom",
+                },
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  className={`relative md:text-center ${
+                    item.align === "top"
+                      ? "md:pb-16"
+                      : "md:pt-16"
+                  }`}
+                >
+                  {/* Year badge */}
+                  <div
+                    className={`inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#d4a574] text-[#0a0f1a] font-bold text-sm z-10 relative mb-3 ${
+                      item.align === "bottom" ? "md:order-1 md:mb-0 md:mt-3" : ""
+                    }`}
+                  >
+                    {item.year.slice(2)}
+                  </div>
+
+                  {/* Content card */}
+                  <div className="md:absolute md:left-1/2 md:-translate-x-1/2 md:w-40">
+                    <div
+                      className={`${
+                        item.align === "top"
+                          ? "md:bottom-full md:mb-4"
+                          : "md:top-full md:mt-4"
+                      }`}
+                    >
+                      <div className="text-[#d4a574] font-bold text-sm mb-1">{item.year}</div>
+                      <div className="text-white font-semibold text-sm leading-tight mb-1">{item.title}</div>
+                      <div className="text-gray-500 text-xs leading-relaxed">{item.desc}</div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Mobile: vertical line */}
+            <div className="md:hidden absolute left-6 top-0 bottom-0 w-0.5 bg-white/10" />
           </div>
         </div>
       </section>
