@@ -546,6 +546,7 @@ export default function Home() {
               </div>
             ))}
           </div>
+          <p className="text-center text-gray-600 italic text-base mt-12">There is no one tool to satisfy all needs</p>
         </div>
       </section>
 
