@@ -392,12 +392,13 @@ export default function Home() {
                   "Bottom Hole Survey",
                   "Light Work Over",
                   "Support Completion on Rig",
-                  "Test Tubing"
+                  "Test Tubing",
+                  "Stimulation Gun Services"
                 ]
               },
               {
                 title: "BOP & Hydrostatic Testing",
-                items: ["BOP Testing", "Hydrostatic Testing", "High Pressure Testing using High Pressure Pump (up to 10,000 psi)", "Stimulation Gun Services"]
+                items: ["BOP Testing", "Hydrostatic Testing", "High Pressure Testing using High Pressure Pump (up to 10,000 psi)"]
               },
               {
                 title: "EMR Pressure & Temperature Recording",
@@ -405,7 +406,7 @@ export default function Home() {
               },
               {
                 title: "Well Integrity Analysis",
-                items: ["MPLT (Memory Production Logging Tool)", "ALFA (Acoustic Leak Flow Analysis)", "GR-CCL (Gamma Ray / Casing Collar Locator)", "Well Integrity Logging", "Downhole Video Inspection", "Leak Detection"]
+                items: ["MPLT (Memory Production Logging Tool)", "ALFA (Acoustic Leak Flow Analysis)", "GR-CCL (Gamma Ray / Casing Collar Locator)", "Well Integrity Logging", "Downhole Video Inspection"]
               },
               {
                 title: "Bottom Hole Sampling",
