@@ -370,29 +370,49 @@ export default function Home() {
             <p className="text-gray-500 max-w-2xl mx-auto">Comprehensive slickline mechanical services and memory logging solutions for the oil and gas industry</p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-6 mb-16">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
             {[
               {
-                title: "Slickline Mechanical",
-                items: ["Flow Control Devices Setting & Retrieval", "SSSV / GLV Installation & Retrieval", "Zone Changing", "Cement / Chemical Dump Bailing", "Sand Bailing & Fishing Operations", "Well Swabbing", "Rigless P&A Support"]
-              },
-              {
-                title: "Memory & Logging",
-                items: ["Memory Reservoir Analysis", "Memory Production Logging (MPLT)", "Well Integrity Logging", "Downhole Video Inspection", "EMR Pressure & Temperature Recording", "Leak Detection"]
-              },
-              {
-                title: "Testing Services",
+                title: "Wireline, Workover, and Slickline Services",
                 items: [
-                  "BOP Testing",
-                  "Hydrostatic Testing",
-                  "High Pressure Testing (10,000 psi)",
-                  "Stimulation Gun Services",
-                  "Bottom Hole Sampling",
-                  "Fluid & Gas Analysis"
+                  "Flow Control Devices or Plugs Setting and Retrieval",
+                  "SSSV Installation and Retrieval",
+                  "GLV Installation and Retrieval",
+                  "Zone Changing",
+                  "Cement or Chemical Dump Bailing",
+                  "Sand Bailing",
+                  "Tubing Puncher",
+                  "Fishing Operations",
+                  "High Deviated Well Operations",
+                  "Well Swabbing Operations",
+                  "Rigless P&A Support Program",
+                  "Swabbing",
+                  "Leak Detection",
+                  "Mechanical Perforation",
+                  "Bottom Hole Survey",
+                  "Light Work Over",
+                  "Support Completion on Rig",
+                  "Test Tubing"
                 ]
+              },
+              {
+                title: "BOP & Hydrostatic Testing",
+                items: ["BOP Testing", "Hydrostatic Testing", "High Pressure Testing using High Pressure Pump (up to 10,000 psi)", "Stimulation Gun Services"]
+              },
+              {
+                title: "EMR Pressure & Temperature Recording",
+                items: ["Electronic Memory Recorder (EMR) deployment", "Pressure & Temperature monitoring", "Reservoir analysis via memory gauges"]
+              },
+              {
+                title: "Well Integrity Analysis",
+                items: ["MPLT (Memory Production Logging Tool)", "ALFA (Acoustic Leak Flow Analysis)", "GR-CCL (Gamma Ray / Casing Collar Locator)", "Well Integrity Logging", "Downhole Video Inspection", "Leak Detection"]
+              },
+              {
+                title: "Bottom Hole Sampling",
+                items: ["Fluid Analysis", "Gas Analysis", "Bottom Hole Sampling operations"]
               }
             ].map((service, i) => (
-              <div key={i} className="p-8 bg-gradient-to-br from-[#142238] to-[#0d1420] border border-white/10 rounded-2xl">
+              <div key={i} className={`p-8 bg-gradient-to-br from-[#142238] to-[#0d1420] border border-white/10 rounded-2xl ${i === 0 ? "md:row-span-2" : ""}`}>
                 <h3 className="text-xl font-semibold text-[#d4a574] mb-6">{service.title}</h3>
                 <ul className="space-y-3">
                   {service.items.map((item, j) => (
