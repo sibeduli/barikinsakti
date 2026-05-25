@@ -1,6 +1,7 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
 
 const workCategories = [
   {
@@ -110,6 +111,8 @@ export default function Home() {
   const [isLightboxLoading, setIsLightboxLoading] = useState(false);
   const [formResult, setFormResult] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState("");
+  const captchaRef = useRef<HCaptcha>(null);
 
   const currentImages = workCategories[currentCategory].images;
   const nextSlide = () => {
@@ -136,11 +139,18 @@ export default function Home() {
 
   const handleContactSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    
+    if (!captchaToken) {
+      setFormResult("captcha");
+      return;
+    }
+    
     setIsSubmitting(true);
     setFormResult("");
 
     const formData = new FormData(event.currentTarget);
     formData.append("access_key", process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "");
+    formData.append("h-captcha-response", captchaToken);
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
@@ -152,6 +162,8 @@ export default function Home() {
 
       if (data.success) {
         setFormResult("success");
+        setCaptchaToken("");
+        captchaRef.current?.resetCaptcha();
         setTimeout(() => event.currentTarget.reset(), 100);
       } else {
         setFormResult("error");
@@ -633,6 +645,15 @@ export default function Home() {
                 <input type="text" name="name" placeholder="Your Name" required className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#d4a574]" />
                 <input type="email" name="email" placeholder="Email Address" required className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#d4a574]" />
                 <textarea name="message" rows={4} placeholder="Your Message" required className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#d4a574] resize-none" />
+                
+                <HCaptcha
+                  ref={captchaRef}
+                  sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
+                  onVerify={(token) => setCaptchaToken(token)}
+                  onExpire={() => setCaptchaToken("")}
+                  theme="dark"
+                />
+                
                 <button type="submit" disabled={isSubmitting} className="w-full py-4 bg-gradient-to-r from-[#d4a574] to-[#b8956a] text-[#0a0f1a] font-semibold rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed">
                   {isSubmitting ? "Sending..." : "Send Message"}
                 </button>
@@ -641,6 +662,9 @@ export default function Home() {
                 )}
                 {formResult === "error" && (
                   <p className="text-red-400 text-sm text-center">✗ Failed to send message. Please try again.</p>
+                )}
+                {formResult === "captcha" && (
+                  <p className="text-yellow-400 text-sm text-center">⚠ Please complete the captcha verification.</p>
                 )}
               </form>
             </div>
