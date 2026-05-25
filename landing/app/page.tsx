@@ -152,14 +152,14 @@ export default function Home() {
 
       if (data.success) {
         setFormResult("success");
-        event.currentTarget.reset();
+        setTimeout(() => event.currentTarget.reset(), 100);
       } else {
         setFormResult("error");
       }
     } catch (error) {
       setFormResult("error");
     } finally {
-      setIsSubmitting(false);
+      setTimeout(() => setIsSubmitting(false), 100);
     }
   };
 
