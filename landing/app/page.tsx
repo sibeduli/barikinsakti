@@ -577,10 +577,10 @@ export default function Home() {
             <div>
               <h2 className="text-3xl font-bold text-white mb-8">Get in Touch</h2>
               <div className="space-y-6">
-                <div>
+                {/* <div>
                   <div className="text-[#d4a574] text-sm font-medium mb-2">Main Office</div>
                   <p className="text-gray-400">Jl. Raya Kelapa Dua Wetan Kav. 18 No. 1F<br />Ciracas, Jakarta Timur 13730</p>
-                </div>
+                </div> */}
                 <div>
                   <div className="text-[#d4a574] text-sm font-medium mb-2">Workshop</div>
                   <p className="text-gray-400">Jl. Kayumanis Bondol No.16, RT.01/RW.03<br />Kota Bogor, Jawa Barat 16169</p>
