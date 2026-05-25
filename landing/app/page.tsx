@@ -108,6 +108,8 @@ export default function Home() {
   const [isImageLoading, setIsImageLoading] = useState(true);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [isLightboxLoading, setIsLightboxLoading] = useState(false);
+  const [formResult, setFormResult] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const currentImages = workCategories[currentCategory].images;
   const nextSlide = () => {
@@ -130,6 +132,35 @@ export default function Home() {
   const handleSlideChange = (newSlide: number) => {
     setCurrentSlide(newSlide);
     setIsImageLoading(true);
+  };
+
+  const handleContactSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setFormResult("");
+
+    const formData = new FormData(event.currentTarget);
+    formData.append("access_key", "YOUR_ACCESS_KEY_HERE");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setFormResult("success");
+        event.currentTarget.reset();
+      } else {
+        setFormResult("error");
+      }
+    } catch (error) {
+      setFormResult("error");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -595,13 +626,22 @@ export default function Home() {
             </div>
             <div className="bg-white/5 border border-white/10 rounded-2xl p-8">
               <h3 className="text-xl font-semibold text-white mb-6">Send a Message</h3>
-              <form className="space-y-4">
-                <input type="text" placeholder="Your Name" className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#d4a574]" />
-                <input type="email" placeholder="Email Address" className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#d4a574]" />
-                <textarea rows={4} placeholder="Your Message" className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#d4a574] resize-none" />
-                <button type="submit" className="w-full py-4 bg-gradient-to-r from-[#d4a574] to-[#b8956a] text-[#0a0f1a] font-semibold rounded-lg hover:opacity-90 transition-opacity">
-                  Send Message
+              <form onSubmit={handleContactSubmit} className="space-y-4">
+                <input type="hidden" name="subject" value="New Contact Form Submission from Barikin Sakti Website" />
+                <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
+                
+                <input type="text" name="name" placeholder="Your Name" required className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#d4a574]" />
+                <input type="email" name="email" placeholder="Email Address" required className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#d4a574]" />
+                <textarea name="message" rows={4} placeholder="Your Message" required className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#d4a574] resize-none" />
+                <button type="submit" disabled={isSubmitting} className="w-full py-4 bg-gradient-to-r from-[#d4a574] to-[#b8956a] text-[#0a0f1a] font-semibold rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed">
+                  {isSubmitting ? "Sending..." : "Send Message"}
                 </button>
+                {formResult === "success" && (
+                  <p className="text-green-400 text-sm text-center">✓ Message sent successfully!</p>
+                )}
+                {formResult === "error" && (
+                  <p className="text-red-400 text-sm text-center">✗ Failed to send message. Please try again.</p>
+                )}
               </form>
             </div>
           </div>
